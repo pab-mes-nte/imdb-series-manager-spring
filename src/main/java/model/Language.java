@@ -13,12 +13,13 @@ public class Language implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "language_series", joinColumns = @JoinColumn(name = "language_id"),
             inverseJoinColumns = @JoinColumn(name = "series_id"))
     private List<Series> seriesList;
 
     public Language() {
+        // Required empty constructor
     }
 
     public Long getId() {

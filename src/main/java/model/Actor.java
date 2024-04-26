@@ -14,12 +14,13 @@ public class Actor implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "actor_series", joinColumns = @JoinColumn(name = "actor_id"),
             inverseJoinColumns = @JoinColumn(name = "series_id"))
     private List<Series> seriesList;
 
     public Actor() {
+        // Required empty constructor
     }
 
     public Long getId() {
