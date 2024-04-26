@@ -14,6 +14,7 @@ public class SeriesLog implements Serializable {
     private String description;
 
     public SeriesLog() {
+        // Required empty constructor
     }
 
     public Long getId() {

@@ -14,11 +14,12 @@ public class Ratings implements Serializable {
     private String name;
     @Column(name = "value_rating")
     private int valueRating;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "series_id")
     private Series seriesList;
 
     public Ratings() {
+        // Required empty constructor
     }
 
     public Long getId() {

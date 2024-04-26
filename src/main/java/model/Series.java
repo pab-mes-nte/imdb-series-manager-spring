@@ -48,6 +48,7 @@ public class Series implements Serializable {
     private List<Ratings> ratings;
 
     public Series() {
+        // Required empty constructor
     }
 
     @Override

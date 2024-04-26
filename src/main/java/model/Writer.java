@@ -13,12 +13,13 @@ public class Writer implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "writer_series", joinColumns = @JoinColumn(name = "writer_id"),
             inverseJoinColumns = @JoinColumn(name = "series_id"))
     private List<Series> seriesList;
 
     public Writer() {
+        // Required empty constructor
     }
 
     public Long getId() {
