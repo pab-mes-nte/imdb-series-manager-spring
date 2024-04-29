@@ -22,6 +22,7 @@ public class Series implements Serializable {
     private String plot;
     @Column(name = "metascore")
     private int metascore;
+    // TODO: Normalize Values of Ratings (out of 100, out of 10...)
     @Column(name = "imbd_rating")
     private int imbdRating;
     @Column(name = "imdb_votes")
@@ -32,19 +33,19 @@ public class Series implements Serializable {
     private int totalSeasons;
     @Column(name = "released")
     private LocalDate released;
-    @ManyToMany(mappedBy = "seriesList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "seriesList")
     private List<Actor> actors;
-    @ManyToMany(mappedBy = "seriesList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "seriesList")
     private List<Country> countries;
-    @ManyToMany(mappedBy = "seriesList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "seriesList")
     private List<Category> categories;
-    @ManyToMany(mappedBy = "seriesList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "seriesList")
     private List<Director> directors;
-    @OneToMany(mappedBy = "seriesList", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "seriesList")
     private List<Language> languages;
-    @ManyToMany(mappedBy = "seriesList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "seriesList")
     private List<Writer> writers;
-    @OneToMany(mappedBy = "seriesList", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "seriesList")
     private List<Ratings> ratings;
 
     public Series() {

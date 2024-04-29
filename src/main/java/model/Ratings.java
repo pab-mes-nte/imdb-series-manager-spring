@@ -12,9 +12,10 @@ public class Ratings implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
+    // TODO: Normalize Values of Ratings (out of 100, out of 10...)
     @Column(name = "value_rating")
     private int valueRating;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "series_id")
     private Series seriesList;
 
