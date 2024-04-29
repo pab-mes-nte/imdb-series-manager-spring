@@ -1,6 +1,6 @@
-package controller;
+package model.repositories;
 
-import model.Language;
+import model.entities.Language;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LanguageRepository extends JpaRepository<Language, Long> {

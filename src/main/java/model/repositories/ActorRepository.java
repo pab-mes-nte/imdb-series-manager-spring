@@ -1,6 +1,6 @@
-package controller;
+package model.repositories;
 
-import model.Actor;
+import model.entities.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ActorRepository extends JpaRepository<Actor, Long> {

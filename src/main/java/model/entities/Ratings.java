@@ -1,4 +1,4 @@
-package model;
+package model.entities;
 
 import jakarta.persistence.*;
 
@@ -10,11 +10,14 @@ public class Ratings implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
     // TODO: Normalize Values of Ratings (out of 100, out of 10...)
     @Column(name = "value_rating")
     private int valueRating;
+
+    // Ratings -> Series
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "series_id")
     private Series serie;

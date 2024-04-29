@@ -1,6 +1,6 @@
-package controller;
+package model.repositories;
 
-import model.Category;
+import model.entities.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {

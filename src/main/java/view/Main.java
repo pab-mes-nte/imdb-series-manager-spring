@@ -1,7 +1,7 @@
 package view;
 
-import controller.*;
-import model.*;
+import model.entities.*;
+import model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
-@EntityScan("model")
-@EnableJpaRepositories(basePackages = "controller")
+@EntityScan("model.entities")
+@EnableJpaRepositories(basePackages = "model.repositories")
 public class Main implements CommandLineRunner {
     private final SeriesRepository seriesRep;
     private final ActorRepository actorRep;
@@ -39,6 +39,7 @@ public class Main implements CommandLineRunner {
         this.logRep = logRep;
         this.writerRep = writerRep;
     }
+
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
@@ -46,7 +47,7 @@ public class Main implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
-        // Serie example
+        // Serie insertion example
         Series serie1 = new Series();
         serie1.setName("Fallout");
         serie1.setRated("TV-MA");
@@ -64,14 +65,14 @@ public class Main implements CommandLineRunner {
         cat2.setName("Adventure");
         Category cat3 = new Category();
         cat3.setName("Drama");
-        serie1.setCategories(List.of(cat1, cat2, cat3));
+        serie1.setCategoriesList(List.of(cat1, cat2, cat3));
 
         // Writers
         Writer writer1 = new Writer();
         writer1.setName("Geneva Robertson-Dworet");
         Writer writer2 = new Writer();
         writer2.setName("Graham Wagner");
-        serie1.setWriters(List.of(writer1, writer2));
+        serie1.setWritersList(List.of(writer1, writer2));
 
         // Actors
         Actor actor1 = new Actor();
@@ -80,25 +81,27 @@ public class Main implements CommandLineRunner {
         actor2.setName("Aaron Moten");
         Actor actor3 = new Actor();
         actor3.setName("Walton Goggins");
-        serie1.setActors(List.of(actor1, actor2, actor3));
+        serie1.setActorsList(List.of(actor1, actor2, actor3));
 
         // Languages
         Language lang1 = new Language();
         lang1.setName("English");
-        serie1.setLanguages(List.of(lang1));
+        serie1.setLanguagesList(List.of(lang1));
 
         // Countries
         Country country1 = new Country();
         country1.setName("United States");
-        serie1.setCountries(List.of(country1));
+        serie1.setCountriesList(List.of(country1));
 
-        // Ratings
+        // Adding a Rating
         Ratings rating1 = new Ratings();
         rating1.setName("Internet Movie Database");
         rating1.setValueRating(87);
-        serie1.setRatings(List.of(rating1));
+        rating1.setSerie(serie1);
+        serie1.setRatingsList(List.of(rating1));
 
         // Data Recording
-        seriesRep.saveAll(List.of(serie1));
+        // Saving a rating triggers the insert of its child objects (serie1), which also triggers the insert of the grandchild objects (actors, writers...)
+        ratingsRep.save(rating1);
     }
 }
