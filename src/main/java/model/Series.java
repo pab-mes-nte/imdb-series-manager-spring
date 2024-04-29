@@ -45,7 +45,7 @@ public class Series implements Serializable {
     private List<Language> languages;
     @ManyToMany(mappedBy = "seriesList")
     private List<Writer> writers;
-    @OneToMany(mappedBy = "seriesList")
+    @OneToMany(mappedBy = "serie")
     private List<Ratings> ratings;
 
     public Series() {

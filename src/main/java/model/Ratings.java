@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "rating")
+@Table(name = "ratings")
 public class Ratings implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Ratings implements Serializable {
     private int valueRating;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "series_id")
-    private Series seriesList;
+    private Series serie;
 
     public Ratings() {
         // Required empty constructor
@@ -47,11 +47,11 @@ public class Ratings implements Serializable {
         this.valueRating = valueRating;
     }
 
-    public Series getSeriesList() {
-        return seriesList;
+    public Series getSerie() {
+        return serie;
     }
 
-    public void setSeriesList(Series seriesList) {
-        this.seriesList = seriesList;
+    public void setSerie(Series serie) {
+        this.serie = serie;
     }
 }
