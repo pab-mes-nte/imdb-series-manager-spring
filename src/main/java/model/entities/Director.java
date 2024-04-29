@@ -17,7 +17,7 @@ public class Director implements Serializable {
 
     // Director -> Series
     @ManyToMany(mappedBy = "directorsList")
-    private List<Series> seriesList;
+    private List<Serie> seriesList;
 
     public Director() {
         // Required empty constructor
@@ -39,11 +39,11 @@ public class Director implements Serializable {
         this.name = name;
     }
 
-    public List<Series> getSeriesList() {
+    public List<Serie> getSeriesList() {
         return seriesList;
     }
 
-    public void setSeriesList(List<Series> seriesList) {
+    public void setSeriesList(List<Serie> seriesList) {
         this.seriesList = seriesList;
     }
 }

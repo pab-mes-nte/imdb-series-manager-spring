@@ -17,7 +17,7 @@ public class Category implements Serializable {
 
     // Category -> Series
     @ManyToMany(mappedBy = "categoriesList")
-    private List<Series> seriesList;
+    private List<Serie> seriesList;
 
     public Category() {
         // Required empty constructor
@@ -39,11 +39,11 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public List<Series> getSeriesList() {
+    public List<Serie> getSeriesList() {
         return seriesList;
     }
 
-    public void setSeriesList(List<Series> seriesList) {
+    public void setSeriesList(List<Serie> seriesList) {
         this.seriesList = seriesList;
     }
 }

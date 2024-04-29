@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "series")
-public class Series implements Serializable {
+@Table(name = "serie")
+public class Serie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,41 +38,41 @@ public class Series implements Serializable {
     // Serie has the join tables so it becomes the owner of the join tables
     // Serie -> Actor
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "actor_series", joinColumns = @JoinColumn(name = "series_id"),
+    @JoinTable(name = "actor_serie", joinColumns = @JoinColumn(name = "serie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actorsList;
     // Serie -> Country
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "country_series", joinColumns = @JoinColumn(name = "series_id"),
+    @JoinTable(name = "country_serie", joinColumns = @JoinColumn(name = "serie_id"),
             inverseJoinColumns = @JoinColumn(name = "country_id"))
     private List<Country> countriesList;
     // Serie -> Category
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "category_series", joinColumns = @JoinColumn(name = "series_id"),
+    @JoinTable(name = "category_serie", joinColumns = @JoinColumn(name = "serie_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categoriesList;
     // Serie -> Director
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "director_series", joinColumns = @JoinColumn(name = "series_id"),
+    @JoinTable(name = "director_serie", joinColumns = @JoinColumn(name = "serie_id"),
             inverseJoinColumns = @JoinColumn(name = "director_id"))
     private List<Director> directorsList;
     // Serie -> Language
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "language_series", joinColumns = @JoinColumn(name = "series_id"),
+    @JoinTable(name = "language_serie", joinColumns = @JoinColumn(name = "serie_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id"))
     private List<Language> languagesList;
     // Serie -> Writer
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "writer_series", joinColumns = @JoinColumn(name = "series_id"),
+    @JoinTable(name = "writer_serie", joinColumns = @JoinColumn(name = "serie_id"),
             inverseJoinColumns = @JoinColumn(name = "writer_id"))
     private List<Writer> writersList;
 
     // The Many of a One to Many can't be the owner of the relation
     // Serie -> Rating
     @OneToMany(mappedBy = "serie")
-    private List<Ratings> ratingsList;
+    private List<Rating> ratingsList;
 
-    public Series() {
+    public Serie() {
         // Required empty constructor
     }
 
@@ -236,11 +236,11 @@ public class Series implements Serializable {
         this.writersList = writersList;
     }
 
-    public List<Ratings> getRatingsList() {
+    public List<Rating> getRatingsList() {
         return ratingsList;
     }
 
-    public void setRatingsList(List<Ratings> ratingsList) {
+    public void setRatingsList(List<Rating> ratingsList) {
         this.ratingsList = ratingsList;
     }
 }

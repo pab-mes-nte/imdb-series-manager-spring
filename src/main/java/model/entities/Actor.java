@@ -18,7 +18,7 @@ public class Actor implements Serializable {
 
     // Actor -> Series
     @ManyToMany(mappedBy = "actorsList")
-    private List<Series> seriesList;
+    private List<Serie> seriesList;
 
     public Actor() {
         // Required empty constructor
@@ -40,11 +40,11 @@ public class Actor implements Serializable {
         this.name = name;
     }
 
-    public List<Series> getSeriesList() {
+    public List<Serie> getSeriesList() {
         return seriesList;
     }
 
-    public void setSeriesList(List<Series> seriesList) {
+    public void setSeriesList(List<Serie> seriesList) {
         this.seriesList = seriesList;
     }
 }

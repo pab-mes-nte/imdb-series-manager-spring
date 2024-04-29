@@ -17,18 +17,19 @@ import java.util.List;
 @EntityScan("model.entities")
 @EnableJpaRepositories(basePackages = "model.repositories")
 public class Main implements CommandLineRunner {
-    private final SeriesRepository seriesRep;
+    // Repositories
+    private final SerieRepository seriesRep;
     private final ActorRepository actorRep;
     private final CategoryRepository categoryRep;
     private final CountryRepository countryRep;
     private final DirectorRepository directorRep;
     private final LanguageRepository languageRep;
-    private final RatingsRepository ratingsRep;
+    private final RatingRepository ratingsRep;
     private final SeriesLogRepository logRep;
     private final WriterRepository writerRep;
 
     @Autowired
-    public Main(final SeriesRepository seriesRep, ActorRepository actorRep, CategoryRepository categoryRep, CountryRepository countryRep, DirectorRepository directorRep, LanguageRepository languageRep, RatingsRepository ratingsRep, SeriesLogRepository logRep, WriterRepository writerRep) {
+    public Main(final SerieRepository seriesRep, ActorRepository actorRep, CategoryRepository categoryRep, CountryRepository countryRep, DirectorRepository directorRep, LanguageRepository languageRep, RatingRepository ratingsRep, SeriesLogRepository logRep, WriterRepository writerRep) {
         this.seriesRep = seriesRep;
         this.actorRep = actorRep;
         this.categoryRep = categoryRep;
@@ -48,7 +49,7 @@ public class Main implements CommandLineRunner {
     @Transactional
     public void run(String... args) {
         // Serie insertion example
-        Series serie1 = new Series();
+        Serie serie1 = new Serie();
         serie1.setName("Fallout");
         serie1.setRated("TV-MA");
         serie1.setPoster("https://m.media-amazon.com/images/M/MV5BN2EwNjFhMmEtZDc4YS00OTUwLTkyODEtMzViMzliZWIyMzYxXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_SX300.jpg");
@@ -94,14 +95,18 @@ public class Main implements CommandLineRunner {
         serie1.setCountriesList(List.of(country1));
 
         // Adding a Rating
-        Ratings rating1 = new Ratings();
-        rating1.setName("Internet Movie Database");
-        rating1.setValueRating(87);
+        Rating rating1 = new Rating();
+        rating1.setSource("Internet Movie Database");
+        rating1.setValue(87);
         rating1.setSerie(serie1);
         serie1.setRatingsList(List.of(rating1));
 
         // Data Recording
         // Saving a rating triggers the insert of its child objects (serie1), which also triggers the insert of the grandchild objects (actors, writers...)
         ratingsRep.save(rating1);
+
+        // Testing of getting data from the db
+        System.out.println(actorRep.findById(1L).get().getName());
+        System.out.println(actorRep.findByName("Aaron Moten").getFirst().getName());
     }
 }
