@@ -22,6 +22,7 @@ public class Rating implements Serializable {
     @JoinColumn(name = "serie_id")
     private Serie serie;
 
+
     public Rating() {
         // Required empty constructor
     }
@@ -56,5 +57,10 @@ public class Rating implements Serializable {
 
     public void setSerie(Serie serie) {
         this.serie = serie;
+    }
+
+    @Override
+    public String toString() {
+        return "Rating{" + "id=" + id + ", source='" + source + '\'' + ", value=" + value + ", serie=" + serie.getName() + '}';
     }
 }

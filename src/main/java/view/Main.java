@@ -18,25 +18,25 @@ import java.util.List;
 @EnableJpaRepositories(basePackages = "model.repositories")
 public class Main implements CommandLineRunner {
     // Repositories
-    private final SerieRepository seriesRep;
+    private final SerieRepository serieRep;
     private final ActorRepository actorRep;
     private final CategoryRepository categoryRep;
     private final CountryRepository countryRep;
     private final DirectorRepository directorRep;
     private final LanguageRepository languageRep;
-    private final RatingRepository ratingsRep;
+    private final RatingRepository ratingRep;
     private final SeriesLogRepository logRep;
     private final WriterRepository writerRep;
 
     @Autowired
-    public Main(final SerieRepository seriesRep, ActorRepository actorRep, CategoryRepository categoryRep, CountryRepository countryRep, DirectorRepository directorRep, LanguageRepository languageRep, RatingRepository ratingsRep, SeriesLogRepository logRep, WriterRepository writerRep) {
-        this.seriesRep = seriesRep;
+    public Main(final SerieRepository serieRep, ActorRepository actorRep, CategoryRepository categoryRep, CountryRepository countryRep, DirectorRepository directorRep, LanguageRepository languageRep, RatingRepository ratingRep, SeriesLogRepository logRep, WriterRepository writerRep) {
+        this.serieRep = serieRep;
         this.actorRep = actorRep;
         this.categoryRep = categoryRep;
         this.countryRep = countryRep;
         this.directorRep = directorRep;
         this.languageRep = languageRep;
-        this.ratingsRep = ratingsRep;
+        this.ratingRep = ratingRep;
         this.logRep = logRep;
         this.writerRep = writerRep;
     }
@@ -103,10 +103,10 @@ public class Main implements CommandLineRunner {
 
         // Data Recording
         // Saving a rating triggers the insert of its child objects (serie1), which also triggers the insert of the grandchild objects (actors, writers...)
-        ratingsRep.save(rating1);
+        ratingRep.save(rating1);
 
         // Testing of getting data from the db
-        System.out.println(actorRep.findById(1L).get().getName());
+        System.out.println(serieRep.findById(1L).get());
         System.out.println(actorRep.findByName("Aaron Moten").getFirst().getName());
     }
 }

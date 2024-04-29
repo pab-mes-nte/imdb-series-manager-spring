@@ -19,6 +19,7 @@ public class Category implements Serializable {
     @ManyToMany(mappedBy = "categoriesList")
     private List<Serie> seriesList;
 
+
     public Category() {
         // Required empty constructor
     }
@@ -45,5 +46,10 @@ public class Category implements Serializable {
 
     public void setSeriesList(List<Serie> seriesList) {
         this.seriesList = seriesList;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

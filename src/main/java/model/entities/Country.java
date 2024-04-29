@@ -19,6 +19,7 @@ public class Country implements Serializable {
     @ManyToMany(mappedBy = "countriesList")
     private List<Serie> seriesList;
 
+
     public Country() {
         // Required empty constructor
     }
@@ -45,5 +46,10 @@ public class Country implements Serializable {
 
     public void setSeriesList(List<Serie> seriesList) {
         this.seriesList = seriesList;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

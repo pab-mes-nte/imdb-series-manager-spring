@@ -14,6 +14,7 @@ public class SeriesLog implements Serializable {
     @Column(name = "log_description")
     private String description;
 
+
     public SeriesLog() {
         // Required empty constructor
     }
@@ -32,5 +33,10 @@ public class SeriesLog implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "SeriesLog{" + "id=" + id + ", description='" + description + '\'' + '}';
     }
 }

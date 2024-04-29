@@ -20,6 +20,7 @@ public class Actor implements Serializable {
     @ManyToMany(mappedBy = "actorsList")
     private List<Serie> seriesList;
 
+
     public Actor() {
         // Required empty constructor
     }
@@ -46,5 +47,10 @@ public class Actor implements Serializable {
 
     public void setSeriesList(List<Serie> seriesList) {
         this.seriesList = seriesList;
+    }
+
+    @Override
+    public String toString() {
+        return "Actor{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

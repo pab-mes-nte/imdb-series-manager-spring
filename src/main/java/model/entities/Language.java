@@ -19,6 +19,7 @@ public class Language implements Serializable {
     @ManyToMany(mappedBy = "languagesList")
     private List<Serie> seriesList;
 
+
     public Language() {
         // Required empty constructor
     }
@@ -45,5 +46,10 @@ public class Language implements Serializable {
 
     public void setSeriesList(List<Serie> seriesList) {
         this.seriesList = seriesList;
+    }
+
+    @Override
+    public String toString() {
+        return "Language{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

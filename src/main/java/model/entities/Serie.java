@@ -17,10 +17,15 @@ public class Serie implements Serializable {
     private String name;
     @Column(name = "rated")
     private String rated;
-    @Column(name = "poster")
-    private String poster;
+    @Column(name = "released")
+    @Temporal(TemporalType.DATE)
+    private LocalDate released;
     @Column(name = "plot")
     private String plot;
+    @Column(name = "awards")
+    private String awards;
+    @Column(name = "poster")
+    private String poster;
     @Column(name = "metascore")
     private int metascore;
     // TODO: Normalize Values of Ratings (out of 100, out of 10...)
@@ -28,43 +33,33 @@ public class Serie implements Serializable {
     private int imbdRating;
     @Column(name = "imdb_votes")
     private int imdbVotes;
-    @Column(name = "awards")
-    private String awards;
     @Column(name = "total_seasons")
     private int totalSeasons;
-    @Column(name = "released")
-    private LocalDate released;
-    
+
     // Serie has the join tables so it becomes the owner of the join tables
     // Serie -> Actor
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "actor_serie", joinColumns = @JoinColumn(name = "serie_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    @JoinTable(name = "actor_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actorsList;
     // Serie -> Country
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "country_serie", joinColumns = @JoinColumn(name = "serie_id"),
-            inverseJoinColumns = @JoinColumn(name = "country_id"))
+    @JoinTable(name = "country_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "country_id"))
     private List<Country> countriesList;
     // Serie -> Category
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "category_serie", joinColumns = @JoinColumn(name = "serie_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "category_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categoriesList;
     // Serie -> Director
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "director_serie", joinColumns = @JoinColumn(name = "serie_id"),
-            inverseJoinColumns = @JoinColumn(name = "director_id"))
+    @JoinTable(name = "director_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "director_id"))
     private List<Director> directorsList;
     // Serie -> Language
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "language_serie", joinColumns = @JoinColumn(name = "serie_id"),
-            inverseJoinColumns = @JoinColumn(name = "language_id"))
+    @JoinTable(name = "language_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "language_id"))
     private List<Language> languagesList;
     // Serie -> Writer
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "writer_serie", joinColumns = @JoinColumn(name = "serie_id"),
-            inverseJoinColumns = @JoinColumn(name = "writer_id"))
+    @JoinTable(name = "writer_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "writer_id"))
     private List<Writer> writersList;
 
     // The Many of a One to Many can't be the owner of the relation
@@ -72,32 +67,9 @@ public class Serie implements Serializable {
     @OneToMany(mappedBy = "serie")
     private List<Rating> ratingsList;
 
+
     public Serie() {
         // Required empty constructor
-    }
-
-    @Override
-    public String toString() {
-        return "Series{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", rated='" + rated + '\'' +
-                ", poster='" + poster + '\'' +
-                ", plot='" + plot + '\'' +
-                ", metascore=" + metascore +
-                ", imbdRating=" + imbdRating +
-                ", imdbVotes=" + imdbVotes +
-                ", awards='" + awards + '\'' +
-                ", totalSeasons=" + totalSeasons +
-                ", released=" + released +
-                ", actorsList=" + actorsList +
-                ", countriesList=" + countriesList +
-                ", categoriesList=" + categoriesList +
-                ", directorsList=" + directorsList +
-                ", languagesList=" + languagesList +
-                ", writersList=" + writersList +
-                ", ratingsList=" + ratingsList +
-                '}';
     }
 
     public Long getId() {
@@ -242,5 +214,10 @@ public class Serie implements Serializable {
 
     public void setRatingsList(List<Rating> ratingsList) {
         this.ratingsList = ratingsList;
+    }
+
+    @Override
+    public String toString() {
+        return "Serie{" + "id=" + id + ", name='" + name + '\'' + ", rated='" + rated + '\'' + ", released=" + released + ", plot='" + plot + '\'' + ", awards='" + awards + '\'' + ", poster='" + poster + '\'' + ", metascore=" + metascore + ", imbdRating=" + imbdRating + ", imdbVotes=" + imdbVotes + ", totalSeasons=" + totalSeasons + '}';
     }
 }
