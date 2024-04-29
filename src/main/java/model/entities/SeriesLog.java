@@ -1,4 +1,4 @@
-package model;
+package model.entities;
 
 import jakarta.persistence.*;
 
@@ -10,8 +10,10 @@ public class SeriesLog implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "log_description")
     private String description;
+
 
     public SeriesLog() {
         // Required empty constructor
@@ -31,5 +33,10 @@ public class SeriesLog implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "SeriesLog{" + "id=" + id + ", description='" + description + '\'' + '}';
     }
 }

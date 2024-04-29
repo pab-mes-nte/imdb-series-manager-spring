@@ -1,5 +1,4 @@
-package model;
-
+package model.entities;
 
 import jakarta.persistence.*;
 
@@ -7,19 +6,21 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "actor")
-public class Actor implements Serializable {
+@Table(name = "writer")
+public class Writer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "actor_series", joinColumns = @JoinColumn(name = "actor_id"),
-            inverseJoinColumns = @JoinColumn(name = "series_id"))
+
+    // Writer -> Series
+    @ManyToMany(mappedBy = "writersList")
     private List<Series> seriesList;
 
-    public Actor() {
+
+    public Writer() {
         // Required empty constructor
     }
 
@@ -45,5 +46,14 @@ public class Actor implements Serializable {
 
     public void setSeriesList(List<Series> seriesList) {
         this.seriesList = seriesList;
+    }
+
+    public void addSeries(Series series) {
+        this.seriesList.add(series);
+    }
+
+    @Override
+    public String toString() {
+        return "Writer{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

@@ -1,4 +1,4 @@
-package model;
+package model.entities;
 
 import jakarta.persistence.*;
 
@@ -6,19 +6,21 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "country")
-public class Country implements Serializable {
+@Table(name = "director")
+public class Director implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "country_series", joinColumns = @JoinColumn(name = "country_id"),
-            inverseJoinColumns = @JoinColumn(name = "series_id"))
+
+    // Director -> Series
+    @ManyToMany(mappedBy = "directorsList")
     private List<Series> seriesList;
 
-    public Country() {
+
+    public Director() {
         // Required empty constructor
     }
 
@@ -44,5 +46,14 @@ public class Country implements Serializable {
 
     public void setSeriesList(List<Series> seriesList) {
         this.seriesList = seriesList;
+    }
+
+    public void addSeries(Series series) {
+        this.seriesList.add(series);
+    }
+
+    @Override
+    public String toString() {
+        return "Director{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

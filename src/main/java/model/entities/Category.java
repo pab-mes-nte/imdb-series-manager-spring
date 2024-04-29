@@ -1,4 +1,4 @@
-package model;
+package model.entities;
 
 import jakarta.persistence.*;
 
@@ -6,19 +6,21 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "language")
-public class Language implements Serializable {
+@Table(name = "category")
+public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "language_series", joinColumns = @JoinColumn(name = "language_id"),
-            inverseJoinColumns = @JoinColumn(name = "series_id"))
+
+    // Category -> Series
+    @ManyToMany(mappedBy = "categoriesList")
     private List<Series> seriesList;
 
-    public Language() {
+
+    public Category() {
         // Required empty constructor
     }
 
@@ -44,5 +46,14 @@ public class Language implements Serializable {
 
     public void setSeriesList(List<Series> seriesList) {
         this.seriesList = seriesList;
+    }
+
+    public void addSeries(Series series) {
+        this.seriesList.add(series);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }
