@@ -19,8 +19,8 @@ public class Rating implements Serializable {
 
     // Ratings -> Series
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "serie_id")
-    private Serie serie;
+    @JoinColumn(name = "series_id")
+    private Series series;
 
 
     public Rating() {
@@ -51,16 +51,16 @@ public class Rating implements Serializable {
         this.value = value;
     }
 
-    public Serie getSerie() {
-        return serie;
+    public Series getSeries() {
+        return series;
     }
 
-    public void setSerie(Serie serie) {
-        this.serie = serie;
+    public void setSeries(Series series) {
+        this.series = series;
     }
 
     @Override
     public String toString() {
-        return "Rating{" + "id=" + id + ", source='" + source + '\'' + ", value=" + value + ", serie=" + serie.getName() + '}';
+        return "Rating{" + "id=" + id + ", source='" + source + '\'' + ", value=" + value + ", series=" + series.getName() + '}';
     }
 }

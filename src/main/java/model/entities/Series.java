@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "serie")
-public class Serie implements Serializable {
+@Table(name = "series")
+public class Series implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,39 +36,39 @@ public class Serie implements Serializable {
     @Column(name = "total_seasons")
     private int totalSeasons;
 
-    // Serie has the join tables so it becomes the owner of the join tables
-    // Serie -> Actor
+    // Series has the join tables, so it becomes the owner of the join tables
+    // Series -> Actor
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "actor_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    @JoinTable(name = "actor_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actorsList;
-    // Serie -> Country
+    // Series -> Country
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "country_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "country_id"))
+    @JoinTable(name = "country_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "country_id"))
     private List<Country> countriesList;
-    // Serie -> Category
+    // Series -> Category
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "category_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "category_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categoriesList;
-    // Serie -> Director
+    // Series -> Director
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "director_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "director_id"))
+    @JoinTable(name = "director_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "director_id"))
     private List<Director> directorsList;
-    // Serie -> Language
+    // Series -> Language
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "language_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "language_id"))
+    @JoinTable(name = "language_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "language_id"))
     private List<Language> languagesList;
-    // Serie -> Writer
+    // Series -> Writer
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "writer_serie", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "writer_id"))
+    @JoinTable(name = "writer_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "writer_id"))
     private List<Writer> writersList;
 
     // The Many of a One to Many can't be the owner of the relation
-    // Serie -> Rating
-    @OneToMany(mappedBy = "serie")
+    // Series -> Rating
+    @OneToMany(mappedBy = "series")
     private List<Rating> ratingsList;
 
 
-    public Serie() {
+    public Series() {
         // Required empty constructor
     }
 
@@ -168,12 +168,20 @@ public class Serie implements Serializable {
         this.actorsList = actorsList;
     }
 
+    public void addActor(Actor actor) {
+        this.actorsList.add(actor);
+    }
+
     public List<Country> getCountriesList() {
         return countriesList;
     }
 
     public void setCountriesList(List<Country> countriesList) {
         this.countriesList = countriesList;
+    }
+
+    public void addCountry(Country country) {
+        this.countriesList.add(country);
     }
 
     public List<Category> getCategoriesList() {
@@ -184,12 +192,20 @@ public class Serie implements Serializable {
         this.categoriesList = categoriesList;
     }
 
+    public void addCategory(Category category) {
+        this.categoriesList.add(category);
+    }
+
     public List<Director> getDirectorsList() {
         return directorsList;
     }
 
     public void setDirectorsList(List<Director> directorsList) {
         this.directorsList = directorsList;
+    }
+
+    public void addDirector(Director director) {
+        this.directorsList.add(director);
     }
 
     public List<Language> getLanguagesList() {
@@ -200,12 +216,20 @@ public class Serie implements Serializable {
         this.languagesList = languagesList;
     }
 
+    public void addLanguage(Language language) {
+        this.languagesList.add(language);
+    }
+
     public List<Writer> getWritersList() {
         return writersList;
     }
 
     public void setWritersList(List<Writer> writersList) {
         this.writersList = writersList;
+    }
+
+    public void addWriter(Writer writer) {
+        this.writersList.add(writer);
     }
 
     public List<Rating> getRatingsList() {
@@ -216,8 +240,12 @@ public class Serie implements Serializable {
         this.ratingsList = ratingsList;
     }
 
+    public void addRating(Rating rating) {
+        this.ratingsList.add(rating);
+    }
+
     @Override
     public String toString() {
-        return "Serie{" + "id=" + id + ", name='" + name + '\'' + ", rated='" + rated + '\'' + ", released=" + released + ", plot='" + plot + '\'' + ", awards='" + awards + '\'' + ", poster='" + poster + '\'' + ", metascore=" + metascore + ", imbdRating=" + imbdRating + ", imdbVotes=" + imdbVotes + ", totalSeasons=" + totalSeasons + '}';
+        return "Series{" + "id=" + id + ", name='" + name + '\'' + ", rated='" + rated + '\'' + ", released=" + released + ", plot='" + plot + '\'' + ", awards='" + awards + '\'' + ", poster='" + poster + '\'' + ", metascore=" + metascore + ", imbdRating=" + imbdRating + ", imdbVotes=" + imdbVotes + ", totalSeasons=" + totalSeasons + '}';
     }
 }
