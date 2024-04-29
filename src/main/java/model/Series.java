@@ -33,19 +33,19 @@ public class Series implements Serializable {
     private int totalSeasons;
     @Column(name = "released")
     private LocalDate released;
-    @ManyToMany(mappedBy = "seriesList")
+    @ManyToMany(mappedBy = "seriesList", cascade = CascadeType.ALL)
     private List<Actor> actors;
-    @ManyToMany(mappedBy = "seriesList")
+    @ManyToMany(mappedBy = "seriesList", cascade = CascadeType.ALL)
     private List<Country> countries;
-    @ManyToMany(mappedBy = "seriesList")
+    @ManyToMany(mappedBy = "seriesList", cascade = CascadeType.ALL)
     private List<Category> categories;
-    @ManyToMany(mappedBy = "seriesList")
+    @ManyToMany(mappedBy = "seriesList", cascade = CascadeType.ALL)
     private List<Director> directors;
-    @OneToMany(mappedBy = "seriesList")
+    @OneToMany(mappedBy = "seriesList", cascade = CascadeType.ALL)
     private List<Language> languages;
-    @ManyToMany(mappedBy = "seriesList")
+    @ManyToMany(mappedBy = "seriesList", cascade = CascadeType.ALL)
     private List<Writer> writers;
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     private List<Ratings> ratings;
 
     public Series() {

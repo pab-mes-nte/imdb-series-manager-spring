@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,6 +44,7 @@ public class Main implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) {
         // Serie example
         Series serie1 = new Series();
@@ -97,12 +99,6 @@ public class Main implements CommandLineRunner {
         serie1.setRatings(List.of(rating1));
 
         // Data Recording
-        categoryRep.saveAll(List.of(cat1, cat2, cat3));
-        writerRep.saveAll(List.of(writer1, writer2));
-        actorRep.saveAll(List.of(actor1, actor2, actor3));
-        languageRep.saveAll(List.of(lang1));
-        countryRep.saveAll(List.of(country1));
-        ratingsRep.save(rating1);
-        seriesRep.save(serie1);
+        seriesRep.saveAll(List.of(serie1));
     }
 }
