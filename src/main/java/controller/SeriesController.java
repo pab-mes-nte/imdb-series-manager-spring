@@ -30,12 +30,12 @@ public class SeriesController {
         logger.info("Containing:{} ", name);
         List<Series> series = seriesRep.findByAllAttributesContainingIgnoreCase(name);
         StringBuilder ret = new StringBuilder();
-        int n = 0;
+        int nResult = 0;
         for (Series s : series) {
             ret.append(s.toString()).append("\n");
-            n++;
+            nResult++;
         }
-        logger.info("Total results:{} ", n);
+        logger.info("Total results:{} ", nResult);
 
         return ret.toString();
     }
