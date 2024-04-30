@@ -26,9 +26,10 @@ public class Series implements Serializable {
     private String awards;
     @Column(name = "poster")
     private String poster;
+    // Out of 100
     @Column(name = "metascore")
     private int metascore;
-    // TODO: Normalize Values of Ratings (out of 100, out of 10...)
+    // Out of 100
     @Column(name = "imbd_rating")
     private int imbdRating;
     @Column(name = "imdb_votes")
@@ -38,39 +39,53 @@ public class Series implements Serializable {
 
     // Series has the join tables, so it becomes the owner of the join tables
     // Series -> Actor
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "actor_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actorsList;
     // Series -> Country
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "country_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "country_id"))
     private List<Country> countriesList;
     // Series -> Category
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "category_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categoriesList;
     // Series -> Director
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "director_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "director_id"))
     private List<Director> directorsList;
     // Series -> Language
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "language_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "language_id"))
     private List<Language> languagesList;
     // Series -> Writer
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "writer_series", joinColumns = @JoinColumn(name = "series_id"), inverseJoinColumns = @JoinColumn(name = "writer_id"))
     private List<Writer> writersList;
 
     // The Many of a One to Many can't be the owner of the relation
     // Series -> Rating
-    @OneToMany(mappedBy = "series")
+    @OneToMany(mappedBy = "series", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
     private List<Rating> ratingsList;
 
 
     public Series() {
         // Required empty constructor
     }
+
+    public Series(String name, String rated, LocalDate released, String plot, String awards, String poster, int metascore, int imbdRating, int imdbVotes, int totalSeasons) {
+        this.name = name;
+        this.rated = rated;
+        this.released = released;
+        this.plot = plot;
+        this.awards = awards;
+        this.poster = poster;
+        this.metascore = metascore;
+        this.imbdRating = imbdRating;
+        this.imdbVotes = imdbVotes;
+        this.totalSeasons = totalSeasons;
+    }
+
 
     public Long getId() {
         return id;

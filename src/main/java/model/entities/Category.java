@@ -12,7 +12,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     // Category -> Series
@@ -23,6 +23,11 @@ public class Category implements Serializable {
     public Category() {
         // Required empty constructor
     }
+
+    public Category(String name) {
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;

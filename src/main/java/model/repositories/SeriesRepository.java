@@ -22,6 +22,7 @@ public interface SeriesRepository extends JpaRepository<Series, Long> {
     <S extends Series> List<S> saveAll(@NonNull Iterable<S> entities);
 
     List<Series> findByName(String name);
+    List<Series> findByIdIn(List<Long> ids);
 
     // Selects the series that contain the given string in any of its attributes
     @Query("SELECT s FROM Series s WHERE LOWER(CONCAT(COALESCE(s.name, ''), ' ', COALESCE(s.rated, ''), ' ', COALESCE(s.released, ''), ' ', COALESCE(s.plot, '')," +

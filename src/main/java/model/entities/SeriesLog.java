@@ -19,6 +19,7 @@ public class SeriesLog implements Serializable {
         // Required empty constructor
     }
 
+
     public Long getId() {
         return id;
     }

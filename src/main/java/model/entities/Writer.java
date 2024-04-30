@@ -12,7 +12,7 @@ public class Writer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     // Writer -> Series
@@ -23,6 +23,11 @@ public class Writer implements Serializable {
     public Writer() {
         // Required empty constructor
     }
+
+    public Writer(String name) {
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;
