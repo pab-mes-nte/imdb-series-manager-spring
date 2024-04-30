@@ -13,7 +13,7 @@ public class Actor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     // Actor -> Series
@@ -24,6 +24,11 @@ public class Actor implements Serializable {
     public Actor() {
         // Required empty constructor
     }
+
+    public Actor(String name) {
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;
@@ -55,6 +60,6 @@ public class Actor implements Serializable {
 
     @Override
     public String toString() {
-        return "Actor{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Actor{" + "name='" + name + '\'' + '}';
     }
 }

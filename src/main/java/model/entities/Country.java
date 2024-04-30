@@ -12,7 +12,7 @@ public class Country implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     // Country -> Series
@@ -23,6 +23,11 @@ public class Country implements Serializable {
     public Country() {
         // Required empty constructor
     }
+
+    public Country(String name) {
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;
@@ -54,6 +59,6 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "Country{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Country{" + "name='" + name + '\'' + '}';
     }
 }

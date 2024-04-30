@@ -12,7 +12,7 @@ public class Director implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     // Director -> Series
@@ -23,6 +23,11 @@ public class Director implements Serializable {
     public Director() {
         // Required empty constructor
     }
+
+    public Director(String name) {
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;
@@ -54,6 +59,6 @@ public class Director implements Serializable {
 
     @Override
     public String toString() {
-        return "Director{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Director{" + "name='" + name + '\'' + '}';
     }
 }

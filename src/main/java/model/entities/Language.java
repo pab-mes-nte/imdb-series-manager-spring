@@ -12,7 +12,7 @@ public class Language implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     // Language -> Series
@@ -23,6 +23,11 @@ public class Language implements Serializable {
     public Language() {
         // Required empty constructor
     }
+
+    public Language(String name) {
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;
@@ -54,6 +59,6 @@ public class Language implements Serializable {
 
     @Override
     public String toString() {
-        return "Language{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Language{" + "name='" + name + '\'' + '}';
     }
 }
