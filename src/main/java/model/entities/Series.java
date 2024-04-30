@@ -246,6 +246,6 @@ public class Series implements Serializable {
 
     @Override
     public String toString() {
-        return "Series{" + "id=" + id + ", name='" + name + '\'' + ", rated='" + rated + '\'' + ", released=" + released + ", plot='" + plot + '\'' + ", awards='" + awards + '\'' + ", poster='" + poster + '\'' + ", metascore=" + metascore + ", imbdRating=" + imbdRating + ", imdbVotes=" + imdbVotes + ", totalSeasons=" + totalSeasons + '}';
+        return "Series{" + "name='" + name + '\'' + ", rated='" + rated + '\'' + ", released=" + released + ", plot='" + plot + '\'' + ", awards='" + awards + '\'' + ", poster='" + poster + '\'' + ", metascore=" + metascore + ", imbdRating=" + imbdRating + ", imdbVotes=" + imdbVotes + ", totalSeasons=" + totalSeasons + '}';
     }
 }

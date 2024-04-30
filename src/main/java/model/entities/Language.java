@@ -54,6 +54,6 @@ public class Language implements Serializable {
 
     @Override
     public String toString() {
-        return "Language{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Language{" + "name='" + name + '\'' + '}';
     }
 }

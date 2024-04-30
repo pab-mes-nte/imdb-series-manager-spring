@@ -54,6 +54,6 @@ public class Writer implements Serializable {
 
     @Override
     public String toString() {
-        return "Writer{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Writer{" + "name='" + name + '\'' + '}';
     }
 }

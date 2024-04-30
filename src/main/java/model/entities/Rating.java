@@ -61,6 +61,6 @@ public class Rating implements Serializable {
 
     @Override
     public String toString() {
-        return "Rating{" + "id=" + id + ", source='" + source + '\'' + ", value=" + value + ", series=" + series.getName() + '}';
+        return "Rating{" + "source='" + source + '\'' + ", value=" + value + ", series=" + series.getName() + '}';
     }
 }

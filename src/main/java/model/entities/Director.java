@@ -54,6 +54,6 @@ public class Director implements Serializable {
 
     @Override
     public String toString() {
-        return "Director{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Director{" + "name='" + name + '\'' + '}';
     }
 }

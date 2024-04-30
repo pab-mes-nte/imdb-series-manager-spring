@@ -55,6 +55,6 @@ public class Actor implements Serializable {
 
     @Override
     public String toString() {
-        return "Actor{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Actor{" + "name='" + name + '\'' + '}';
     }
 }
