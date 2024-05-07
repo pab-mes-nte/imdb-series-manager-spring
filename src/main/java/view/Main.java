@@ -21,7 +21,7 @@ import java.util.Optional;
 @SpringBootApplication
 @EntityScan("model.entities")
 @EnableJpaRepositories(basePackages = "model.repositories")
-@ComponentScan("controller")
+@ComponentScan({"controller", "services"})
 public class Main implements CommandLineRunner {
     // Logger
     private static final Logger logger = LogManager.getLogger("SeriesController");

@@ -15,19 +15,13 @@ public class Series implements Serializable {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-    @Column(name = "rated")
     private String rated;
-    @Column(name = "released")
     @Temporal(TemporalType.DATE)
     private LocalDate released;
-    @Column(name = "plot")
     private String plot;
-    @Column(name = "awards")
     private String awards;
-    @Column(name = "poster")
     private String poster;
     // Out of 100
-    @Column(name = "metascore")
     private int metascore;
     // Out of 100
     @Column(name = "imbd_rating")

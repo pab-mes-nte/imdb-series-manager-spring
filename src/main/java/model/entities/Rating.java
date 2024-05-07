@@ -11,10 +11,8 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "source")
     private String source;
     // TODO: Normalize Values of Ratings (out of 100, out of 10...)
-    @Column(name = "value")
     private int value;
 
     // Ratings -> Series
