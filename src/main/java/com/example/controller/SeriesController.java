@@ -28,19 +28,26 @@ public class SeriesController {
     }
 
     // Returns all series
-    @GetMapping("/series")
+    @GetMapping("/seriesList")
     @Produces("application/json")
-    public List<Series> getSeries(@Context HttpServletRequest req) {
+    public List<Series> getSeriesList(@Context HttpServletRequest req) {
         logger.info("Returning all series to {}", req.getRemoteAddr());
         return seriesService.getSeries();
     }
 
-    // TODO: Change name
-    // Returns the serie with the given ID
-    @GetMapping("/serie")
+    // Returns the series with the given ID
+    @GetMapping("/seriesById")
     @Produces("application/json")
-    public Series getSerie(@Context HttpServletRequest req, @RequestParam("id") Long id) {
+    public Series getSeries(@Context HttpServletRequest req, @RequestParam("id") Long id) {
         logger.info("Sending series to {} with ID: {}", req.getRemoteAddr(), id);
         return seriesService.getSerieById(id);
+    }
+
+    // Returns the series with the given name
+    @GetMapping("/seriesLikeName")
+    @Produces("application/json")
+    public List<Series> getSeriesLikeName(@Context HttpServletRequest req, @RequestParam("name") String name) {
+        logger.info("Sending series to {} with name: {}", req.getRemoteAddr(), name);
+        return seriesService.getSeriesLikeName(name);
     }
 }
