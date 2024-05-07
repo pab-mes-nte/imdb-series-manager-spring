@@ -1,5 +1,6 @@
 package com.example.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -10,12 +11,14 @@ import java.util.List;
 public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "name", unique = true)
     private String name;
 
     // Country -> Series
+    @JsonIgnore
     @ManyToMany(mappedBy = "countriesList")
     private List<Series> seriesList;
 

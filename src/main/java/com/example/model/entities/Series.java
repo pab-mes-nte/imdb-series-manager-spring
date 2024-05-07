@@ -1,5 +1,6 @@
 package com.example.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -59,6 +60,7 @@ public class Series implements Serializable {
 
     // The Many of a One to Many can't be the owner of the relation
     // Series -> Rating
+    @JsonIgnore
     @OneToMany(mappedBy = "series", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
     private List<Rating> ratingsList;
 

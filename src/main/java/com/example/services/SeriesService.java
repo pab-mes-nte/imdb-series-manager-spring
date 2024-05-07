@@ -1,6 +1,12 @@
 package com.example.services;
 
+import com.example.model.entities.Series;
+
+import java.util.List;
+
 public interface SeriesService {
 
-    String getSeries();
+    List<Series> getSeries();
+
+    Series getSerieById(Long id);
 }

@@ -1,15 +1,19 @@
 package com.example.controller;
 
+import com.example.model.entities.Series;
+import com.example.services.SeriesService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import com.example.services.SeriesService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class SeriesController {
     // Logger
@@ -23,10 +27,20 @@ public class SeriesController {
         this.seriesService = seriesService;
     }
 
+    // Returns all series
     @GetMapping("/series")
-    public String getSeries(@RequestParam(name = "name") String name) {
-        logger.info("Containing:{} ", name);
+    @Produces("application/json")
+    public List<Series> getSeries(@Context HttpServletRequest req) {
+        logger.info("Returning all series to {}", req.getRemoteAddr());
+        return seriesService.getSeries();
+    }
 
-        return "Response From Get (/series)";
+    // TODO: Change name
+    // Returns the serie with the given ID
+    @GetMapping("/serie")
+    @Produces("application/json")
+    public Series getSerie(@Context HttpServletRequest req, @RequestParam("id") Long id) {
+        logger.info("Sending series to {} with ID: {}", req.getRemoteAddr(), id);
+        return seriesService.getSerieById(id);
     }
 }
