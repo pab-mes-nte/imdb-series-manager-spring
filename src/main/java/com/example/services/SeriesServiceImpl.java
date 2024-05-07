@@ -27,4 +27,9 @@ public class SeriesServiceImpl implements SeriesService {
     public Series getSerieById(Long id) {
         return seriesRep.findById(id).orElse(null);
     }
+
+    @Override
+    public List<Series> getSeriesLikeName(String name) {
+        return seriesRep.findByNameContainingIgnoreCase(name);
+    }
 }

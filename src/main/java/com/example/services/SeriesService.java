@@ -9,4 +9,6 @@ public interface SeriesService {
     List<Series> getSeries();
 
     Series getSerieById(Long id);
+
+    List<Series> getSeriesLikeName(String name);
 }
