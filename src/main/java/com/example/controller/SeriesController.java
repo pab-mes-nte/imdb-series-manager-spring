@@ -27,6 +27,6 @@ public class SeriesController {
     public String getSeries(@RequestParam(name = "name") String name) {
         logger.info("Containing:{} ", name);
 
-        return "Hallo";
+        return "Response From Get (/series)";
     }
 }

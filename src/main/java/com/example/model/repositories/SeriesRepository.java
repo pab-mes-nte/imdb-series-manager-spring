@@ -29,4 +29,7 @@ public interface SeriesRepository extends JpaRepository<Series, Long> {
             " ' ', COALESCE(s.awards, ''), ' ', COALESCE(s.poster, ''), ' ', COALESCE(s.metascore, ''), ' ', COALESCE(s.imbdRating, ''), ' ', COALESCE(s.imdbVotes, '')," +
             " ' ', COALESCE(s.totalSeasons, ''))) LIKE LOWER(CONCAT('%', :str, '%'))")
     List<Series> findByAllAttributesContainingIgnoreCase(@Param("str") String str);
+
+    // Select the series that contain the given string in its name
+    List<Series> findByNameContainingIgnoreCase(String str);
 }
