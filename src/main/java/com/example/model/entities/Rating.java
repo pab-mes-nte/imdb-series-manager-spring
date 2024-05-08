@@ -12,7 +12,7 @@ public class Rating implements Serializable {
     private Long id;
 
     private String source;
-    // TODO: Normalize Values of Ratings (out of 100, out of 10...)
+    // Out of ?
     private Integer value;
 
     // Ratings -> Series
