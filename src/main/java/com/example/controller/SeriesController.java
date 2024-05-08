@@ -1,8 +1,10 @@
 package com.example.controller;
 
+import com.example.model.entities.Rating;
 import com.example.model.entities.Series;
 import com.example.services.SeriesService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import org.apache.logging.log4j.LogManager;
@@ -52,5 +54,23 @@ public class SeriesController {
     public List<Series> getSeriesLikeName(@Context HttpServletRequest req, @RequestParam("name") String name) {
         logger.info("Sending series to {} with name: {}", req.getRemoteAddr(), name);
         return seriesService.getSeriesLikeName(name);
+    }
+
+    // http://localhost:8080/api/ratingsOf?id=1
+    // Returns the ratings with the given series ID
+    @GetMapping("/ratingsOf")
+    @Produces("application/json")
+    public List<Rating> getRatingsOf(@Context HttpServletRequest req, @RequestParam("id") Long id) {
+        logger.info("Sending ratings to {} with series ID: {}", req.getRemoteAddr(), id);
+        return seriesService.getRatingsBySeriesId(id);
+    }
+
+    // http://localhost:8080/api/ratingsOf?id=1
+    // Returns the ratings with the given series ID
+//    @PostMapping("/ins-series")
+//    @Consumes("application/json")
+//    public List<Rating> postSeries(@Context HttpServletRequest req, @RequestParam("series") Series series) {
+//        logger.info("Inserting series from {}", req.getRemoteAddr());
+//        return seriesService.getRatingsBySeriesId(id);
     }
 }

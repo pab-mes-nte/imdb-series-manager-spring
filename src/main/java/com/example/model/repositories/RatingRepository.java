@@ -21,4 +21,5 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     List<Rating> findBySource(String source);
     List<Rating> findByIdIn(List<Long> ids);
+    List<Rating> findBySeriesId(Long seriesId);
 }
