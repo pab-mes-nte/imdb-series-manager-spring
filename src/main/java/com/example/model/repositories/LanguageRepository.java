@@ -19,6 +19,6 @@ public interface LanguageRepository extends JpaRepository<Language, Long> {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     <S extends Language> List<S> saveAll(@NonNull Iterable<S> entities);
 
-    List<Language> findByName(String name);
+    Language findByName(String name);
     List<Language> findByIdIn(List<Long> ids);
 }

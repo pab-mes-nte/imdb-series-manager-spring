@@ -19,6 +19,6 @@ public interface WriterRepository extends JpaRepository<Writer, Long> {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     <S extends Writer> List<S> saveAll(@NonNull Iterable<S> entities);
 
-    List<Writer> findByName(String name);
+    Writer findByName(String name);
     List<Writer> findByIdIn(List<Long> ids);
 }

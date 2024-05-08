@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Context;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,48 +30,57 @@ public class SeriesController {
         this.seriesService = seriesService;
     }
 
-    // http://localhost:8080/api/seriesList
+    // http://localhost:8080/api/series/list
     // Returns all series
-    @GetMapping("/seriesList")
+    @GetMapping("/series/list")
     @Produces("application/json")
     public List<Series> getSeriesList(@Context HttpServletRequest req) {
-        logger.info("Returning all series to {}", req.getRemoteAddr());
+        logger.info("Sending all series to {}", req.getRemoteAddr());
         return seriesService.getSeries();
     }
 
-    // http://localhost:8080/api/seriesById?id=1
+    // http://localhost:8080/api/series/by-id?id=1
     // Returns the series with the given ID
-    @GetMapping("/seriesById")
+    @GetMapping("/series/by-id")
     @Produces("application/json")
-    public Series getSeries(@Context HttpServletRequest req, @RequestParam("id") Long id) {
-        logger.info("Sending series to {} with ID: {}", req.getRemoteAddr(), id);
+    public Series getSeriesById(@Context HttpServletRequest req, @RequestParam("id") Long id) {
+        logger.info("Sending series to {} with ID={}", req.getRemoteAddr(), id);
         return seriesService.getSerieById(id);
     }
 
-    // http://localhost:8080/api/seriesLikeName?name=ll
+    // http://localhost:8080/api/series/like?name=ll
     // Returns the series containing the given name
-    @GetMapping("/seriesLikeName")
+    @GetMapping("/series/like")
     @Produces("application/json")
-    public List<Series> getSeriesLikeName(@Context HttpServletRequest req, @RequestParam("name") String name) {
-        logger.info("Sending series to {} with name: {}", req.getRemoteAddr(), name);
+    public List<Series> getSeriesLike(@Context HttpServletRequest req, @RequestParam("name") String name) {
+        logger.info("Sending all series to {} with name containing '{}' (case insensitive)", req.getRemoteAddr(), name);
         return seriesService.getSeriesLikeName(name);
     }
 
-    // http://localhost:8080/api/ratingsOf?id=1
+    // http://localhost:8080/api/ratings/of?id=1
     // Returns the ratings with the given series ID
-    @GetMapping("/ratingsOf")
+    @GetMapping("/ratings/of")
     @Produces("application/json")
     public List<Rating> getRatingsOf(@Context HttpServletRequest req, @RequestParam("id") Long id) {
-        logger.info("Sending ratings to {} with series ID: {}", req.getRemoteAddr(), id);
+        logger.info("Sending all ratings to {} with series ID={}", req.getRemoteAddr(), id);
         return seriesService.getRatingsBySeriesId(id);
     }
 
-    // http://localhost:8080/api/ratingsOf?id=1
-    // Returns the ratings with the given series ID
-//    @PostMapping("/ins-series")
-//    @Consumes("application/json")
-//    public List<Rating> postSeries(@Context HttpServletRequest req, @RequestParam("series") Series series) {
-//        logger.info("Inserting series from {}", req.getRemoteAddr());
-//        return seriesService.getRatingsBySeriesId(id);
+    // http://localhost:8080/api/series/new
+    // Inserts a series with the body's JSON data
+    @PostMapping("/series/new")
+    @Consumes("application/json")
+    public ResponseEntity<Object> newSeries(@Context HttpServletRequest req, @RequestBody Series series) {
+        logger.info("Insert request of series '{}' from {}", series.getName(), req.getRemoteAddr());
+        return seriesService.postSeries(series);
+    }
+
+    // http://localhost:8080/api/series/updt
+    // Updates a series with the body's JSON data
+    @PutMapping("/series/updt")
+    @Consumes("application/json")
+    public ResponseEntity<Object> updtSeries(@Context HttpServletRequest req, @RequestBody Series series) {
+        logger.info("Update request of series with ID={} from {}", series.getId(), req.getRemoteAddr());
+        return seriesService.putSeries(series);
     }
 }

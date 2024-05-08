@@ -13,7 +13,6 @@ public class SeriesRandomizer {
     SeriesRandData data = new SeriesRandData();
     private final Random r = new Random();
 
-    // TODO: Remove Unused Repositories
     private final SeriesRepository seriesRep;
     private final ActorRepository actorRep;
     private final CategoryRepository categoryRep;
@@ -21,10 +20,9 @@ public class SeriesRandomizer {
     private final DirectorRepository directorRep;
     private final LanguageRepository languageRep;
     private final RatingRepository ratingRep;
-    private final SeriesLogRepository logRep;
     private final WriterRepository writerRep;
 
-    public SeriesRandomizer(SeriesRepository seriesRep, ActorRepository actorRep, CategoryRepository categoryRep, CountryRepository countryRep, DirectorRepository directorRep, LanguageRepository languageRep, RatingRepository ratingRep, SeriesLogRepository logRep, WriterRepository writerRep) {
+    public SeriesRandomizer(SeriesRepository seriesRep, ActorRepository actorRep, CategoryRepository categoryRep, CountryRepository countryRep, DirectorRepository directorRep, LanguageRepository languageRep, RatingRepository ratingRep, WriterRepository writerRep) {
         this.seriesRep = seriesRep;
         this.actorRep = actorRep;
         this.categoryRep = categoryRep;
@@ -32,7 +30,6 @@ public class SeriesRandomizer {
         this.directorRep = directorRep;
         this.languageRep = languageRep;
         this.ratingRep = ratingRep;
-        this.logRep = logRep;
         this.writerRep = writerRep;
     }
 
@@ -129,11 +126,11 @@ public class SeriesRandomizer {
 
         // Insert of random ratings
         for (int i = 0; i < data.series.length; i++) {
-            List<Series> series1 = seriesRep.findByName(data.series[i]);
+            Series sR = seriesRep.findByName(data.series[i]);
             n = r.nextInt(3);
             for (int j = 0; j < n; j++) {
                 Rating rating = new Rating(data.ratingSources[r.nextInt(data.ratingSources.length)], r.nextInt(10) + 1);
-                rating.setSeries(series1.getFirst());
+                rating.setSeries(sR);
                 ratingRep.save(rating);
             }
         }

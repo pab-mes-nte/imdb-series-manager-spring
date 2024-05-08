@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class DBInit implements CommandLineRunner {
     // Logger
-    private static final Logger logger = LogManager.getLogger("SeriesController");
+    private static final Logger logger = LogManager.getLogger("DBInit");
 
     // Repositories
     private final SeriesRepository seriesRep;
@@ -106,9 +106,15 @@ public class DBInit implements CommandLineRunner {
             // Data Recording
             seriesRep.save(series1);
             ratingRep.save(rating1);
-            SeriesRandomizer randomizer = new SeriesRandomizer(seriesRep, actorRep, categoryRep, countryRep, directorRep, languageRep, ratingRep, logRep, writerRep);
+
+            // Random Data
+            SeriesRandomizer randomizer = new SeriesRandomizer(seriesRep, actorRep, categoryRep, countryRep, directorRep, languageRep, ratingRep, writerRep);
             randomizer.randomize();
         }
+
+        SeriesLog log = new SeriesLog();
+        log.setDescription("DB Initialized");
+        logRep.save(log);
 
         logger.info("Complete!");
     }
