@@ -27,6 +27,7 @@ public class SeriesController {
         this.seriesService = seriesService;
     }
 
+    // http://localhost:8080/api/seriesList
     // Returns all series
     @GetMapping("/seriesList")
     @Produces("application/json")
@@ -35,6 +36,7 @@ public class SeriesController {
         return seriesService.getSeries();
     }
 
+    // http://localhost:8080/api/seriesById?id=1
     // Returns the series with the given ID
     @GetMapping("/seriesById")
     @Produces("application/json")
@@ -43,7 +45,8 @@ public class SeriesController {
         return seriesService.getSerieById(id);
     }
 
-    // Returns the series with the given name
+    // http://localhost:8080/api/seriesLikeName?name=ll
+    // Returns the series containing the given name
     @GetMapping("/seriesLikeName")
     @Produces("application/json")
     public List<Series> getSeriesLikeName(@Context HttpServletRequest req, @RequestParam("name") String name) {
