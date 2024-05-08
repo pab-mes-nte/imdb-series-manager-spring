@@ -23,14 +23,14 @@ public class Series implements Serializable {
     private String awards;
     private String poster;
     // Out of 100
-    private int metascore;
+    private Integer metascore;
     // Out of 100
     @Column(name = "imbd_rating")
-    private int imbdRating;
+    private Integer imbdRating;
     @Column(name = "imdb_votes")
-    private int imdbVotes;
+    private Integer imdbVotes;
     @Column(name = "total_seasons")
-    private int totalSeasons;
+    private Integer totalSeasons;
 
     // Series has the join tables, so it becomes the owner of the join tables
     // Series -> Actor
@@ -69,7 +69,7 @@ public class Series implements Serializable {
         // Required empty constructor
     }
 
-    public Series(String name, String rated, LocalDate released, String plot, String awards, String poster, int metascore, int imbdRating, int imdbVotes, int totalSeasons) {
+    public Series(String name, String rated, LocalDate released, String plot, String awards, String poster, Integer metascore, Integer imbdRating, Integer imdbVotes, Integer totalSeasons) {
         this.name = name;
         this.rated = rated;
         this.released = released;
@@ -123,27 +123,27 @@ public class Series implements Serializable {
         this.plot = plot;
     }
 
-    public int getMetascore() {
+    public Integer getMetascore() {
         return metascore;
     }
 
-    public void setMetascore(int metascore) {
+    public void setMetascore(Integer metascore) {
         this.metascore = metascore;
     }
 
-    public int getImbdRating() {
+    public Integer getImbdRating() {
         return imbdRating;
     }
 
-    public void setImbdRating(int imbdRating) {
+    public void setImbdRating(Integer imbdRating) {
         this.imbdRating = imbdRating;
     }
 
-    public int getImdbVotes() {
+    public Integer getImdbVotes() {
         return imdbVotes;
     }
 
-    public void setImdbVotes(int imdbVotes) {
+    public void setImdbVotes(Integer imdbVotes) {
         this.imdbVotes = imdbVotes;
     }
 
@@ -155,11 +155,11 @@ public class Series implements Serializable {
         this.awards = awards;
     }
 
-    public int getTotalSeasons() {
+    public Integer getTotalSeasons() {
         return totalSeasons;
     }
 
-    public void setTotalSeasons(int totalSeasons) {
+    public void setTotalSeasons(Integer totalSeasons) {
         this.totalSeasons = totalSeasons;
     }
 

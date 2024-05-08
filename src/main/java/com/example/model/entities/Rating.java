@@ -13,7 +13,7 @@ public class Rating implements Serializable {
 
     private String source;
     // TODO: Normalize Values of Ratings (out of 100, out of 10...)
-    private int value;
+    private Integer value;
 
     // Ratings -> Series
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
@@ -25,7 +25,7 @@ public class Rating implements Serializable {
         // Required empty constructor
     }
 
-    public Rating(String source, int value) {
+    public Rating(String source, Integer value) {
         this.source = source;
         this.value = value;
     }
@@ -51,7 +51,7 @@ public class Rating implements Serializable {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
