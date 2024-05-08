@@ -1,5 +1,6 @@
 package com.example.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 public class Rating implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     private String source;
@@ -18,6 +20,7 @@ public class Rating implements Serializable {
     // Ratings -> Series
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "series_id")
+    @JsonIgnore
     private Series series;
 
 
