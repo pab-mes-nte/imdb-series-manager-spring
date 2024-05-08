@@ -19,6 +19,6 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     <S extends Country> List<S> saveAll(@NonNull Iterable<S> entities);
 
-    List<Country> findByName(String name);
+    Country findByName(String name);
     List<Country> findByIdIn(List<Long> ids);
 }

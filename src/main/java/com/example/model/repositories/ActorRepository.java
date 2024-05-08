@@ -19,6 +19,6 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     <S extends Actor> List<S> saveAll(@NonNull Iterable<S> entities);
 
-    List<Actor> findByName(String name);
+    Actor findByName(String name);
     List<Actor> findByIdIn(List<Long> ids);
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+// TODO: Give this use in aspects or whatever (or remove it)
 public interface SeriesLogRepository extends JpaRepository<SeriesLog, Long> {
     @Override
     @NonNull
