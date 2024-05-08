@@ -21,7 +21,7 @@ public interface SeriesRepository extends JpaRepository<Series, Long> {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     <S extends Series> List<S> saveAll(@NonNull Iterable<S> entities);
 
-    List<Series> findByName(String name);
+    Series findByName(String name);
     List<Series> findByIdIn(List<Long> ids);
 
     // Selects the series that contain the given string in any of its attributes

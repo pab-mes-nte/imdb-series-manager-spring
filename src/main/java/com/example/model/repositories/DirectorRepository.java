@@ -19,6 +19,6 @@ public interface DirectorRepository extends JpaRepository<Director, Long> {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     <S extends Director> List<S> saveAll(@NonNull Iterable<S> entities);
 
-    List<Director> findByName(String name);
+    Director findByName(String name);
     List<Director> findByIdIn(List<Long> ids);
 }

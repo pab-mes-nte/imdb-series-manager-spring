@@ -19,6 +19,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     <S extends Category> List<S> saveAll(@NonNull Iterable<S> entities);
 
-    List<Category> findByName(String name);
+    Category findByName(String name);
     List<Category> findByIdIn(List<Long> ids);
 }
