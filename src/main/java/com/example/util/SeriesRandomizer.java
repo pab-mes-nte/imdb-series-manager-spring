@@ -1,16 +1,15 @@
 package com.example.util;
 
-import com.example.model.repositories.*;
 import com.example.model.entities.*;
+import com.example.model.repositories.*;
+
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 public class SeriesRandomizer {
     // Data
-    SeriesRandData data = new SeriesRandData();
+    private final SeriesRandData data = new SeriesRandData();
     private final Random r = new Random();
 
     private final SeriesRepository seriesRep;
