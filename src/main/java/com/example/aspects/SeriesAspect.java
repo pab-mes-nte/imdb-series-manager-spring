@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 @Component
 @Aspect
@@ -59,13 +58,13 @@ public class SeriesAspect {
         if (series.getActorsList() != null) {
             ArrayList<Actor> actorsList = new ArrayList<>();
             for (Actor actor : series.getActorsList()) {
-                // If the child's name is not null
-                if (actor.getName() != null) {
-                    // Searches for the child name
-                    Actor existingActor = actorRep.findByName(actor.getName());
-                    // Adds the child if it doesn't exist
-                    actorsList.add(Objects.requireNonNullElse(existingActor, actor));
+                // If the child does not exist in the DB
+                if (actor.getName() != null && actorRep.findByName(actor.getName()) == null) {
+                    // Insert it
+                    actorRep.save(new Actor(actor.getName()));
                 }
+                // Searches for the child's name and adds it to the new list
+                actorsList.add(actorRep.findByName(actor.getName()));
             }
             series.setActorsList(actorsList);
         }
@@ -74,13 +73,13 @@ public class SeriesAspect {
             // Checks the children are unique, creating a relation with the existing ones if not
             ArrayList<Category> categoriesList = new ArrayList<>();
             for (Category category : series.getCategoriesList()) {
-                // If the child's name is not null
-                if (category.getName() != null) {
-                    // Searches for the child name
-                    Category existingCategory = categoryRep.findByName(category.getName());
-                    // Adds the child if it doesn't exist
-                    categoriesList.add(Objects.requireNonNullElse(existingCategory, category));
+                // If the child does not exist in the DB
+                if (category.getName() != null && categoryRep.findByName(category.getName()) == null) {
+                    // Insert it
+                    categoryRep.save(new Category(category.getName()));
                 }
+                // Searches for the child's name and adds it to the new list
+                categoriesList.add(categoryRep.findByName(category.getName()));
             }
             series.setCategoriesList(categoriesList);
         }
@@ -89,13 +88,13 @@ public class SeriesAspect {
             // Checks the children are unique, creating a relation with the existing ones if not
             ArrayList<Country> countriesList = new ArrayList<>();
             for (Country country : series.getCountriesList()) {
-                // If the child's name is not null
-                if (country.getName() != null) {
-                    // Searches for the child name
-                    Country existingCountry = countryRep.findByName(country.getName());
-                    // Adds the child if it doesn't exist
-                    countriesList.add(Objects.requireNonNullElse(existingCountry, country));
+                // If the child does not exist in the DB
+                if (country.getName() != null && countryRep.findByName(country.getName()) == null) {
+                    // Insert it
+                    countryRep.save(new Country(country.getName()));
                 }
+                // Searches for the child's name and adds it to the new list
+                countriesList.add(countryRep.findByName(country.getName()));
             }
             series.setCountriesList(countriesList);
         }
@@ -104,13 +103,13 @@ public class SeriesAspect {
             // Checks the children are unique, creating a relation with the existing ones if not
             ArrayList<Director> directorsList = new ArrayList<>();
             for (Director director : series.getDirectorsList()) {
-                // If the child's name is not null
-                if (director.getName() != null) {
-                    // Searches for the child name
-                    Director existingDirector = directorRep.findByName(director.getName());
-                    // Adds the child if it doesn't exist
-                    directorsList.add(Objects.requireNonNullElse(existingDirector, director));
+                // If the child does not exist in the DB
+                if (director.getName() != null && directorRep.findByName(director.getName()) == null) {
+                    // Insert it
+                    directorRep.save(new Director(director.getName()));
                 }
+                // Searches for the child's name and adds it to the new list
+                directorsList.add(directorRep.findByName(director.getName()));
             }
             series.setDirectorsList(directorsList);
         }
@@ -119,13 +118,13 @@ public class SeriesAspect {
             // Checks the children are unique, creating a relation with the existing ones if not
             ArrayList<Language> languagesList = new ArrayList<>();
             for (Language language : series.getLanguagesList()) {
-                // If the child's name is not null
-                if (language.getName() != null) {
-                    // Searches for the child name
-                    Language existingLanguage = languageRep.findByName(language.getName());
-                    // Adds the child if it doesn't exist
-                    languagesList.add(Objects.requireNonNullElse(existingLanguage, language));
+                // If the child does not exist in the DB
+                if (language.getName() != null && languageRep.findByName(language.getName()) == null) {
+                    // Insert it
+                    languageRep.save(new Language(language.getName()));
                 }
+                // Searches for the child's name and adds it to the new list
+                languagesList.add(languageRep.findByName(language.getName()));
             }
             series.setLanguagesList(languagesList);
         }
@@ -134,13 +133,13 @@ public class SeriesAspect {
             // Checks the children are unique, creating a relation with the existing ones if not
             ArrayList<Writer> writersList = new ArrayList<>();
             for (Writer writer : series.getWritersList()) {
-                // If the child's name is not null
-                if (writer.getName() != null) {
-                    // Searches for the child name
-                    Writer existingWriter = writerRep.findByName(writer.getName());
-                    // Adds the child if it doesn't exist
-                    writersList.add(Objects.requireNonNullElse(existingWriter, writer));
+                // If the child does not exist in the DB
+                if (writer.getName() != null && writerRep.findByName(writer.getName()) == null) {
+                    // Insert it
+                    writerRep.save(new Writer(writer.getName()));
                 }
+                // Searches for the child's name and adds it to the new list
+                writersList.add(writerRep.findByName(writer.getName()));
             }
             series.setWritersList(writersList);
         }
