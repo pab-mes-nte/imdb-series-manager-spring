@@ -48,11 +48,11 @@ public class SeriesController {
         return seriesService.getSerieById(id);
     }
 
-    // http://localhost:8080/api/series/like?name=ll
+    // http://localhost:8080/api/series/search?name=ll
     // Returns the series containing the given name
-    @GetMapping("/series/like")
+    @GetMapping("/series/search")
     @Produces("application/json")
-    public List<Series> getSeriesLike(@Context HttpServletRequest req, @RequestParam("name") String name) {
+    public List<Series> getSeriesSearch(@Context HttpServletRequest req, @RequestParam("name") String name) {
         logger.info("Sending all series to {} with name containing '{}' (case insensitive)", req.getRemoteAddr(), name);
         return seriesService.getSeriesLikeName(name);
     }
