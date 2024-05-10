@@ -7,7 +7,6 @@ import com.example.model.repositories.SeriesRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -55,10 +54,15 @@ public class SeriesServiceImpl implements SeriesService {
             // Removes the ID, so it doesn't update another existing series
             series.setId(null);
             seriesRep.save(series);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().body("Series Created");
         } else {
-            logger.info("Series '{}' already exists or name is null!", series.getName());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            if (series.getName() == null) {
+                logger.warn("Series name is null!");
+                return ResponseEntity.badRequest().body("Series Name is Null");
+            } else {
+                logger.warn("Series '{}' already exists!", series.getName());
+                return ResponseEntity.badRequest().body("Series Already Exists");
+            }
         }
     }
 
@@ -70,18 +74,23 @@ public class SeriesServiceImpl implements SeriesService {
                 // If the name is not null and it doesn't exist (except if it's the same series as the one being changed)
                 if (series.getName() != null && (seriesRep.findByName(series.getName()) == null || seriesRep.findByName(series.getName()).getId().equals(series.getId()))) {
                     seriesRep.save(series);
-                    return new ResponseEntity<>(HttpStatus.OK);
+                    return ResponseEntity.ok().body("Series Updated");
                 } else {
-                    logger.info("Series '{}' already exists or name is null!", series.getName());
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    if (series.getName() == null) {
+                        logger.warn("Series name is null!");
+                        return ResponseEntity.badRequest().body("Series Name is Null");
+                    } else {
+                        logger.warn("Series '{}' already exists!", series.getName());
+                        return ResponseEntity.badRequest().body("Series Already Exists");
+                    }
                 }
             } else {
-                logger.info("Series with ID={} does not exist!", series.getId());
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                logger.warn("Series with ID={} does not exist!", series.getId());
+                return ResponseEntity.notFound().build();
             }
         } else {
-            logger.info("Series ID is null!");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            logger.warn("Series ID is null!");
+            return ResponseEntity.badRequest().body("Series ID is Null");
         }
     }
 }

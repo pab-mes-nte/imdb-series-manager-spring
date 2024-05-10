@@ -101,11 +101,15 @@ public class DBInit implements CommandLineRunner {
             rating1.setSource("Internet Movie Database");
             rating1.setValue(87);
             rating1.setSeries(series1);
-            series1.setRatingsList(List.of(rating1));
+            Rating rating2 = new Rating();
+            rating2.setSource("Internet Movie Database");
+            rating2.setValue(87);
+            rating2.setSeries(series1);
+            series1.setRatingsList(List.of(rating1, rating2));
 
             // Data Recording
             seriesRep.save(series1);
-            ratingRep.save(rating1);
+            ratingRep.saveAll(List.of(rating1, rating2));
 
             // Random Data
             SeriesRandomizer randomizer = new SeriesRandomizer(seriesRep, actorRep, categoryRep, countryRep, directorRep, languageRep, ratingRep, writerRep);

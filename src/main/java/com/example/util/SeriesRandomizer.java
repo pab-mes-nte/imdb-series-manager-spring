@@ -128,7 +128,7 @@ public class SeriesRandomizer {
             Series sR = seriesRep.findByName(data.series[i]);
             n = r.nextInt(3);
             for (int j = 0; j < n; j++) {
-                Rating rating = new Rating(data.ratingSources[r.nextInt(data.ratingSources.length)], r.nextInt(10) + 1);
+                Rating rating = new Rating(data.ratingSources[r.nextInt(data.ratingSources.length)], r.nextInt(100) + 1);
                 rating.setSeries(sR);
                 ratingRep.save(rating);
             }

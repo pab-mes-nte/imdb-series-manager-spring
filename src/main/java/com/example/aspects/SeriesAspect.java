@@ -146,7 +146,9 @@ public class SeriesAspect {
     }
 
     @After("insIntoSeries()")
-    public void insertedSeries() {
-        logger.info("Success!");
+    public void insertedSeries(JoinPoint jP) {
+        // Receives inserted series
+        Series series = (Series) jP.getArgs()[0];
+        logger.info("Series '{}' insert successful!", series.getName());
     }
 }
